@@ -1,0 +1,534 @@
+/* Nova Architecture - Responsive Styles */
+
+/* ===== WIDE SCREENS (1440px+) ===== */
+@media (min-width: 1440px) {
+    :root {
+        --container-max: 1400px;
+    }
+}
+
+/* ===== DESKTOP (1024px - 1439px) ===== */
+@media (max-width: 1439px) {
+    :root {
+        --container-max: 1200px;
+    }
+
+    .featured__grid {
+        gap: 24px;
+    }
+
+    .footer__grid {
+        gap: 40px;
+    }
+}
+
+/* ===== TABLET (768px - 1023px) ===== */
+@media (max-width: 1023px) {
+    :root {
+        --container-padding: 30px;
+        --section-padding: clamp(50px, 8vw, 80px);
+    }
+
+    /* Navigation */
+    .nav__list {
+        display: none;
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 500px;
+    }
+
+    .hero__subtitle {
+        font-size: 18px;
+    }
+
+    /* Intro */
+    .intro {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .intro__stats {
+        order: 2;
+    }
+
+    .intro__content {
+        order: 1;
+    }
+
+    /* Featured */
+    .featured__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .featured__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    /* Services */
+    .services__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Portfolio */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* About */
+    .philosophy {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .philosophy__image {
+        max-height: 400px;
+        width: 100%;
+    }
+
+    .values__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Timeline */
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline__item {
+        flex-direction: column !important;
+        gap: 16px;
+        padding-left: 40px;
+    }
+
+    .timeline__year {
+        flex: auto;
+        text-align: left !important;
+        font-size: 36px;
+    }
+
+    .timeline__content {
+        flex: auto;
+    }
+
+    .timeline__dot {
+        left: 0;
+        transform: translateX(0);
+    }
+
+    /* Team */
+    .team__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    /* Contacts */
+    .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    /* Footer */
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer__brand {
+        grid-column: span 2;
+    }
+}
+
+/* ===== MOBILE (< 768px) ===== */
+@media (max-width: 767px) {
+    :root {
+        --container-padding: 20px;
+        --section-padding: clamp(40px, 10vw, 60px);
+    }
+
+    /* Typography adjustments */
+    h1 {
+        font-size: clamp(36px, 10vw, 48px);
+    }
+
+    h2 {
+        font-size: clamp(28px, 6vw, 36px);
+    }
+
+    h3 {
+        font-size: clamp(20px, 4vw, 24px);
+    }
+
+    /* Header */
+    .header {
+        padding: 16px 0;
+    }
+
+    .header__logo {
+        font-size: 24px;
+    }
+
+    /* Hero */
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 0 80px;
+    }
+
+    .hero__label {
+        font-size: 11px;
+        margin-bottom: 16px;
+    }
+
+    .hero__title {
+        margin-bottom: 24px;
+    }
+
+    .hero__subtitle {
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+
+    .hero__scroll {
+        display: none;
+    }
+
+    /* Intro */
+    .intro__stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+    }
+
+    .stat__number {
+        font-size: 40px;
+    }
+
+    /* Featured */
+    .featured__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-card {
+        aspect-ratio: 4/3;
+    }
+
+    .project-card__title {
+        font-size: 20px;
+    }
+
+    /* Services */
+    .services__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .service-card {
+        padding: 30px;
+    }
+
+    .service-card__title {
+        font-size: 20px;
+    }
+
+    /* Portfolio */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .portfolio-filter {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+
+    /* Values */
+    .values__grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .value-card {
+        padding: 30px 20px;
+    }
+
+    /* Timeline */
+    .timeline__item {
+        padding-left: 30px;
+        margin-bottom: 40px;
+    }
+
+    .timeline__year {
+        font-size: 28px;
+    }
+
+    .timeline__content h3 {
+        font-size: 18px;
+    }
+
+    /* Team */
+    .team__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .team-card__name {
+        font-size: 20px;
+    }
+
+    /* Page Hero */
+    .page-hero {
+        height: auto;
+        min-height: 50vh;
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
+    /* Contact */
+    .contact-item__value {
+        font-size: 18px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 14px;
+    }
+
+    /* Map */
+    .map-section {
+        height: 350px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 60px 0 30px;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer__brand {
+        grid-column: auto;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 14px 24px;
+        font-size: 13px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn--large {
+        padding: 16px 32px;
+    }
+
+    /* Cards */
+    .card__content {
+        padding: 20px;
+    }
+
+    .card__title {
+        font-size: 20px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+        max-width: 100%;
+        padding: 80px 30px 30px;
+    }
+
+    .mobile-menu__link {
+        font-size: 28px;
+    }
+
+    /* Back to top */
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Parallax disabled on mobile for performance */
+    .parallax {
+        transform: none !important;
+    }
+}
+
+/* ===== SMALL MOBILE (< 375px) ===== */
+@media (max-width: 374px) {
+    :root {
+        --container-padding: 16px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 26px;
+    }
+
+    .header__logo {
+        font-size: 20px;
+    }
+
+    .stat__number {
+        font-size: 32px;
+    }
+
+    .intro__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card__overlay {
+        padding: 20px;
+    }
+
+    .service-card {
+        padding: 24px;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE ===== */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 100px 0 60px;
+    }
+
+    .page-hero {
+        min-height: auto;
+    }
+}
+
+/* ===== HIGH DPI SCREENS ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Sharper borders */
+    .btn,
+    .card,
+    .service-card,
+    .form-group input,
+    .form-group textarea {
+        border-width: 0.5px;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    .header,
+    .footer,
+    .burger,
+    .mobile-menu,
+    .back-to-top,
+    .hero__scroll {
+        display: none !important;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 40px 0;
+    }
+
+    .section {
+        padding: 30px 0;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+    }
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+}
+
+/* ===== TOUCH DEVICE ADJUSTMENTS ===== */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects that don't work well on touch */
+    .hover-lift:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .project-card:hover .project-card__image {
+        transform: none;
+    }
+
+    .project-card:hover::after {
+        opacity: 0;
+    }
+
+    .service-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Increase touch targets */
+    .nav__link {
+        padding: 12px 0;
+    }
+
+    .btn {
+        min-height: 48px;
+    }
+
+    .filter-btn {
+        min-height: 44px;
+    }
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+    /* Optional: Add dark mode overrides if needed */
+    /* The site is already dark-themed so minimal changes needed */
+}
+
+/* ===== CONTAINER QUERIES (where supported) ===== */
+@supports (container-type: inline-size) {
+    .services__grid {
+        container-type: inline-size;
+    }
+
+    @container (max-width: 600px) {
+        .service-card {
+            padding: 24px;
+        }
+
+        .service-card__title {
+            font-size: 18px;
+        }
+    }
+}

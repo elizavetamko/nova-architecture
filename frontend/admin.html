@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель - Nova Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-input: #0f3460;
+            --accent: #e94560;
+            --accent-hover: #ff6b6b;
+            --gold: #D4AF37;
+            --text: #eaeaea;
+            --text-muted: #a0a0a0;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --border: #2a2a4a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Layout */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 0 20px 30px;
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-logo span {
+            color: var(--gold);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a.active {
+            background-color: rgba(233, 69, 96, 0.1);
+            color: var(--text);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar-nav li a svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .badge {
+            background-color: var(--accent);
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status.active {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: var(--success);
+        }
+
+        .status.inactive {
+            background-color: rgba(160, 160, 160, 0.2);
+            color: var(--text-muted);
+        }
+
+        .status.unread {
+            background-color: rgba(233, 69, 96, 0.2);
+            color: var(--accent);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-input);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--border);
+        }
+
+        .btn-icon {
+            padding: 8px;
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--bg-input);
+            color: var(--text);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Image preview */
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            background-color: var(--bg-input);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .image-preview.empty {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Message card */
+        .message-card {
+            background-color: var(--bg-input);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .message-card:hover {
+            background-color: var(--border);
+        }
+
+        .message-card.unread {
+            border-left-color: var(--accent);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .message-sender {
+            font-weight: 600;
+        }
+
+        .message-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .message-preview {
+            font-size: 14px;
+            color: var(--text-muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .tab:hover {
+            color: var(--text);
+        }
+
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        /* Section */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Thumbnail in table */
+        .thumbnail {
+            width: 60px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+            background-color: var(--bg-input);
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--success);
+            color: var(--bg-dark);
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.error {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">NOVA<span>.</span> Admin</div>
+            <div class="user-info" style="padding: 16px 20px; border-bottom: 1px solid var(--border); margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 40px; height: 40px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <div id="user-name" style="font-weight: 600; font-size: 14px;">Admin</div>
+                        <div id="user-role" style="font-size: 12px; color: var(--text-muted);">Адміністратор</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#" data-section="dashboard" class="active">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"/>
+                            <rect x="14" y="3" width="7" height="7"/>
+                            <rect x="14" y="14" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/>
+                        </svg>
+                        Дашборд
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="projects">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        Проєкти
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="messages">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        Повідомлення
+                        <span class="badge" id="unread-count">0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="team">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        Команда
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-section="services">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                        Послуги
+                    </a>
+                </li>
+                <li style="margin-top: 40px; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <a href="index.html">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        На сайт
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout(); return false;" style="color: var(--accent);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Вийти
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="page-header">
+                    <h1>Дашборд</h1>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Проєкти</h3>
+                        <div class="value" id="stat-projects">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Повідомлення</h3>
+                        <div class="value" id="stat-messages">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Команда</h3>
+                        <div class="value" id="stat-team">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Послуги</h3>
+                        <div class="value" id="stat-services">0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Останні повідомлення</h2>
+                    </div>
+                    <div id="recent-messages"></div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <div class="page-header">
+                    <h1>Проєкти</h1>
+                    <button class="btn btn-primary" onclick="openProjectModal()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Додати проєкт
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Зображення</th>
+                                    <th>Назва</th>
+                                    <th>Категорія</th>
+                                    <th>Рік</th>
+                                    <th>Статус</th>
+                                    <th>Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projects-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Messages Section -->
+            <section id="messages" class="section">
+                <div class="page-header">
+                    <h1>Повідомлення</h1>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" data-tab="inbox">Вхідні</button>
+                    <button class="tab" data-tab="archived">Архів</button>
+                </div>
+
+                <div class="card">
+                    <div id="messages-list"></div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section id="team" class="section">
+                <div class="page-header">
+                    <h1>Команда</h1>
+                    <button class="btn btn-primary" onclick="openTeamModal()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Додати члена
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Фото</th>
+                                    <th>Ім'я</th>
+                                    <th>Посада</th>
+                                    <th>Email</th>
+                                    <th>Статус</th>
+                                    <th>Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody id="team-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="section">
+                <div class="page-header">
+                    <h1>Послуги</h1>
+                    <button class="btn btn-primary" onclick="openServiceModal()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Додати послугу
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Зображення</th>
+                                    <th>Назва</th>
+                                    <th>Опис</th>
+                                    <th>Статус</th>
+                                    <th>Дії</th>
+                                </tr>
+                            </thead>
+                            <tbody id="services-table"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Project Modal -->
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="project-modal-title">Додати проєкт</h2>
+                <button class="btn-icon" onclick="closeModal('project-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="project-form">
+                    <input type="hidden" id="project-id">
+                    <div class="form-group">
+                        <label>Назва проєкту</label>
+                        <input type="text" id="project-title" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Категорія</label>
+                            <select id="project-category" required>
+                                <option value="residential">Житлова</option>
+                                <option value="commercial">Комерційна</option>
+                                <option value="cultural">Культурна</option>
+                                <option value="interior">Інтер'єр</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Рік</label>
+                            <input type="text" id="project-year">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Локація</label>
+                            <input type="text" id="project-location">
+                        </div>
+                        <div class="form-group">
+                            <label>Площа</label>
+                            <input type="text" id="project-area" placeholder="напр. 5 000 м²">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Опис</label>
+                        <textarea id="project-description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Зображення (URL)</label>
+                        <input type="text" id="project-image" placeholder="images/portfolio/...">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="project-featured"> Показувати на головній
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('project-modal')">Скасувати</button>
+                <button class="btn btn-primary" onclick="saveProject()">Зберегти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Modal -->
+    <div class="modal-overlay" id="team-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="team-modal-title">Додати члена команди</h2>
+                <button class="btn-icon" onclick="closeModal('team-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="team-form">
+                    <input type="hidden" id="team-id">
+                    <div class="form-group">
+                        <label>Ім'я</label>
+                        <input type="text" id="team-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Посада</label>
+                        <input type="text" id="team-role" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="team-email">
+                    </div>
+                    <div class="form-group">
+                        <label>Біографія</label>
+                        <textarea id="team-bio"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Фото (URL)</label>
+                        <input type="text" id="team-image" placeholder="images/team/...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('team-modal')">Скасувати</button>
+                <button class="btn btn-primary" onclick="saveTeamMember()">Зберегти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal-overlay" id="service-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="service-modal-title">Додати послугу</h2>
+                <button class="btn-icon" onclick="closeModal('service-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="service-form">
+                    <input type="hidden" id="service-id">
+                    <div class="form-group">
+                        <label>Назва</label>
+                        <input type="text" id="service-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Опис</label>
+                        <textarea id="service-description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Зображення (URL)</label>
+                        <input type="text" id="service-image" placeholder="images/services/...">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('service-modal')">Скасувати</button>
+                <button class="btn btn-primary" onclick="saveService()">Зберегти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div class="modal-overlay" id="message-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Повідомлення</h2>
+                <button class="btn-icon" onclick="closeModal('message-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="message-detail"></div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="archiveMessage()">Архівувати</button>
+                <button class="btn btn-primary" onclick="closeModal('message-modal')">Закрити</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const API_URL = 'http://localhost:8080/api';
+        let currentMessageId = null;
+        let currentTab = 'inbox';
+
+        // Authentication check
+        const token = localStorage.getItem('adminToken');
+        const adminUser = JSON.parse(localStorage.getItem('adminUser') || 'null');
+
+        if (!token) {
+            window.location.href = 'login.html';
+        } else {
+            validateAndInit();
+        }
+
+        async function validateAndInit() {
+            try {
+                const response = await fetch(`${API_URL}/auth/validate`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                if (!data.valid) {
+                    logout();
+                    return;
+                }
+                // Update user info in sidebar
+                if (adminUser) {
+                    document.getElementById('user-name').textContent = adminUser.fullName || adminUser.username;
+                    document.getElementById('user-role').textContent = adminUser.role === 'ADMIN' ? 'Адміністратор' : adminUser.role;
+                }
+                // Load initial data
+                loadDashboard();
+            } catch (e) {
+                console.error('Auth validation failed:', e);
+                logout();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUser');
+            window.location.href = 'login.html';
+        }
+
+        // Authenticated fetch helper
+        async function authFetch(url, options = {}) {
+            const headers = {
+                ...options.headers,
+                'Authorization': `Bearer ${token}`
+            };
+            if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
+                headers['Content-Type'] = 'application/json';
+                options.body = JSON.stringify(options.body);
+            }
+            const response = await fetch(url, { ...options, headers });
+            if (response.status === 401 || response.status === 403) {
+                logout();
+                throw new Error('Unauthorized');
+            }
+            return response;
+        }
+
+        // Navigation
+        document.querySelectorAll('.sidebar-nav a[data-section]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.dataset.section;
+                showSection(section);
+                document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            loadSectionData(section);
+        }
+
+        function loadSectionData(section) {
+            switch(section) {
+                case 'dashboard': loadDashboard(); break;
+                case 'projects': loadProjects(); break;
+                case 'messages': loadMessages(); break;
+                case 'team': loadTeam(); break;
+                case 'services': loadServices(); break;
+            }
+        }
+
+        // Dashboard
+        async function loadDashboard() {
+            try {
+                const [projects, messages, team, services] = await Promise.all([
+                    authFetch(`${API_URL}/admin/projects`).then(r => r.json()),
+                    authFetch(`${API_URL}/admin/messages`).then(r => r.json()),
+                    authFetch(`${API_URL}/admin/team`).then(r => r.json()),
+                    authFetch(`${API_URL}/admin/services`).then(r => r.json())
+                ]);
+
+                document.getElementById('stat-projects').textContent = projects.length;
+                document.getElementById('stat-messages').textContent = messages.length;
+                document.getElementById('stat-team').textContent = team.length;
+                document.getElementById('stat-services').textContent = services.length;
+
+                const unreadCount = messages.filter(m => !m.isRead).length;
+                document.getElementById('unread-count').textContent = unreadCount;
+
+                // Recent messages
+                const recentHtml = messages.slice(0, 5).map(m => `
+                    <div class="message-card ${m.isRead ? '' : 'unread'}" onclick="viewMessage(${m.id})">
+                        <div class="message-header">
+                            <span class="message-sender">${m.name}</span>
+                            <span class="message-date">${formatDate(m.createdAt)}</span>
+                        </div>
+                        <div class="message-preview">${m.message}</div>
+                    </div>
+                `).join('');
+                document.getElementById('recent-messages').innerHTML = recentHtml || '<p style="color: var(--text-muted)">Немає повідомлень</p>';
+            } catch (e) {
+                console.error('Failed to load dashboard:', e);
+            }
+        }
+
+        // Projects
+        async function loadProjects() {
+            try {
+                const projects = await authFetch(`${API_URL}/admin/projects`).then(r => r.json());
+                const html = projects.map(p => `
+                    <tr>
+                        <td><img src="${p.imagePath || 'images/placeholder.jpg'}" class="thumbnail" onerror="this.src='images/placeholder.jpg'"></td>
+                        <td><strong>${p.title}</strong></td>
+                        <td>${p.categoryLabel || p.category}</td>
+                        <td>${p.year || '-'}</td>
+                        <td><span class="status ${p.active ? 'active' : 'inactive'}">${p.active ? 'Активний' : 'Неактивний'}</span></td>
+                        <td class="actions">
+                            <button class="btn-icon" onclick="editProject(${p.id})" title="Редагувати">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" onclick="deleteProject(${p.id})" title="Видалити">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                document.getElementById('projects-table').innerHTML = html || '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Немає проєктів</td></tr>';
+            } catch (e) {
+                console.error('Failed to load projects:', e);
+            }
+        }
+
+        function openProjectModal(project = null) {
+            document.getElementById('project-modal-title').textContent = project ? 'Редагувати проєкт' : 'Додати проєкт';
+            document.getElementById('project-id').value = project?.id || '';
+            document.getElementById('project-title').value = project?.title || '';
+            document.getElementById('project-category').value = project?.category || 'residential';
+            document.getElementById('project-year').value = project?.year || '';
+            document.getElementById('project-location').value = project?.location || '';
+            document.getElementById('project-area').value = project?.area || '';
+            document.getElementById('project-description').value = project?.description || '';
+            document.getElementById('project-image').value = project?.imagePath || '';
+            document.getElementById('project-featured').checked = project?.featured || false;
+            document.getElementById('project-modal').classList.add('active');
+        }
+
+        async function editProject(id) {
+            try {
+                const response = await authFetch(`${API_URL}/admin/projects/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to load project');
+                }
+                const project = await response.json();
+                openProjectModal(project);
+            } catch (e) {
+                console.error('Edit project error:', e);
+                showToast('Помилка завантаження проєкту', true);
+            }
+        }
+
+        async function saveProject() {
+            const id = document.getElementById('project-id').value;
+            const categorySelect = document.getElementById('project-category');
+            const categoryLabels = { residential: 'Житлова', commercial: 'Комерційна', cultural: 'Культурна', interior: "Інтер'єр" };
+
+            const data = {
+                title: document.getElementById('project-title').value,
+                category: categorySelect.value,
+                categoryLabel: categoryLabels[categorySelect.value],
+                year: document.getElementById('project-year').value,
+                location: document.getElementById('project-location').value,
+                area: document.getElementById('project-area').value,
+                description: document.getElementById('project-description').value,
+                imagePath: document.getElementById('project-image').value,
+                featured: document.getElementById('project-featured').checked,
+                active: true
+            };
+
+            try {
+                const url = id ? `${API_URL}/admin/projects/${id}` : `${API_URL}/admin/projects`;
+                const method = id ? 'PUT' : 'POST';
+                const response = await authFetch(url, {
+                    method,
+                    body: data
+                });
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || 'Server error');
+                }
+                closeModal('project-modal');
+                loadProjects();
+                showToast('Проєкт збережено');
+            } catch (e) {
+                console.error('Save project error:', e);
+                showToast('Помилка збереження: ' + e.message, true);
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!confirm('Видалити цей проєкт?')) return;
+            try {
+                await authFetch(`${API_URL}/admin/projects/${id}`, { method: 'DELETE' });
+                loadProjects();
+                showToast('Проєкт видалено');
+            } catch (e) {
+                showToast('Помилка видалення', true);
+            }
+        }
+
+        // Messages
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentTab = tab.dataset.tab;
+                loadMessages();
+            });
+        });
+
+        async function loadMessages() {
+            try {
+                const endpoint = currentTab === 'archived' ? '/archived' : '';
+                const messages = await authFetch(`${API_URL}/admin/messages${endpoint}`).then(r => r.json());
+                const html = messages.map(m => `
+                    <div class="message-card ${m.isRead ? '' : 'unread'}" onclick="viewMessage(${m.id})">
+                        <div class="message-header">
+                            <span class="message-sender">${m.name} &lt;${m.email}&gt;</span>
+                            <span class="message-date">${formatDate(m.createdAt)}</span>
+                        </div>
+                        <div class="message-preview">${m.message}</div>
+                    </div>
+                `).join('');
+                document.getElementById('messages-list').innerHTML = html || '<p style="color: var(--text-muted); padding: 20px;">Немає повідомлень</p>';
+            } catch (e) {
+                console.error('Failed to load messages:', e);
+            }
+        }
+
+        async function viewMessage(id) {
+            currentMessageId = id;
+            try {
+                await authFetch(`${API_URL}/admin/messages/${id}/read`, { method: 'PATCH' });
+                const m = await authFetch(`${API_URL}/admin/messages/${id}`).then(r => r.json());
+                document.getElementById('message-detail').innerHTML = `
+                    <div class="form-group">
+                        <label>Від</label>
+                        <p style="margin:0">${m.name}</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p style="margin:0"><a href="mailto:${m.email}" style="color: var(--accent)">${m.email}</a></p>
+                    </div>
+                    ${m.phone ? `<div class="form-group"><label>Телефон</label><p style="margin:0">${m.phone}</p></div>` : ''}
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <p style="margin:0">${formatDate(m.createdAt)}</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Повідомлення</label>
+                        <p style="margin:0; white-space: pre-wrap;">${m.message}</p>
+                    </div>
+                `;
+                document.getElementById('message-modal').classList.add('active');
+                loadMessages();
+                updateUnreadCount();
+            } catch (e) {
+                console.error('Failed to view message:', e);
+            }
+        }
+
+        async function archiveMessage() {
+            if (!currentMessageId) return;
+            try {
+                await authFetch(`${API_URL}/admin/messages/${currentMessageId}/archive`, { method: 'PATCH' });
+                closeModal('message-modal');
+                loadMessages();
+                showToast('Повідомлення архівовано');
+            } catch (e) {
+                showToast('Помилка', true);
+            }
+        }
+
+        async function updateUnreadCount() {
+            try {
+                const { count } = await authFetch(`${API_URL}/admin/messages/count/unread`).then(r => r.json());
+                document.getElementById('unread-count').textContent = count;
+            } catch (e) {}
+        }
+
+        // Team
+        async function loadTeam() {
+            try {
+                const team = await authFetch(`${API_URL}/admin/team`).then(r => r.json());
+                const html = team.map(m => `
+                    <tr>
+                        <td><img src="${m.imagePath || 'images/placeholder.jpg'}" class="thumbnail" onerror="this.src='images/placeholder.jpg'"></td>
+                        <td><strong>${m.name}</strong></td>
+                        <td>${m.role}</td>
+                        <td>${m.email || '-'}</td>
+                        <td><span class="status ${m.active ? 'active' : 'inactive'}">${m.active ? 'Активний' : 'Неактивний'}</span></td>
+                        <td class="actions">
+                            <button class="btn-icon" onclick="editTeamMember(${m.id})" title="Редагувати">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" onclick="deleteTeamMember(${m.id})" title="Видалити">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                document.getElementById('team-table').innerHTML = html || '<tr><td colspan="6" style="text-align:center;color:var(--text-muted)">Немає членів команди</td></tr>';
+            } catch (e) {
+                console.error('Failed to load team:', e);
+            }
+        }
+
+        function openTeamModal(member = null) {
+            document.getElementById('team-modal-title').textContent = member ? 'Редагувати члена' : 'Додати члена команди';
+            document.getElementById('team-id').value = member?.id || '';
+            document.getElementById('team-name').value = member?.name || '';
+            document.getElementById('team-role').value = member?.role || '';
+            document.getElementById('team-email').value = member?.email || '';
+            document.getElementById('team-bio').value = member?.bio || '';
+            document.getElementById('team-image').value = member?.imagePath || '';
+            document.getElementById('team-modal').classList.add('active');
+        }
+
+        async function editTeamMember(id) {
+            const member = await authFetch(`${API_URL}/admin/team/${id}`).then(r => r.json());
+            openTeamModal(member);
+        }
+
+        async function saveTeamMember() {
+            const id = document.getElementById('team-id').value;
+            const data = {
+                name: document.getElementById('team-name').value,
+                role: document.getElementById('team-role').value,
+                email: document.getElementById('team-email').value,
+                bio: document.getElementById('team-bio').value,
+                imagePath: document.getElementById('team-image').value,
+                active: true
+            };
+
+            try {
+                const url = id ? `${API_URL}/admin/team/${id}` : `${API_URL}/admin/team`;
+                const method = id ? 'PUT' : 'POST';
+                const response = await authFetch(url, {
+                    method,
+                    body: data
+                });
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || 'Server error');
+                }
+                closeModal('team-modal');
+                loadTeam();
+                showToast('Збережено');
+            } catch (e) {
+                console.error('Save team member error:', e);
+                showToast('Помилка: ' + e.message, true);
+            }
+        }
+
+        async function deleteTeamMember(id) {
+            if (!confirm('Видалити цього члена команди?')) return;
+            try {
+                await authFetch(`${API_URL}/admin/team/${id}`, { method: 'DELETE' });
+                loadTeam();
+                showToast('Видалено');
+            } catch (e) {
+                showToast('Помилка', true);
+            }
+        }
+
+        // Services
+        async function loadServices() {
+            try {
+                const services = await authFetch(`${API_URL}/admin/services`).then(r => r.json());
+                const html = services.map(s => `
+                    <tr>
+                        <td><img src="${s.imagePath || 'images/placeholder.jpg'}" class="thumbnail" onerror="this.src='images/placeholder.jpg'"></td>
+                        <td><strong>${s.title}</strong></td>
+                        <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${s.description || '-'}</td>
+                        <td><span class="status ${s.active ? 'active' : 'inactive'}">${s.active ? 'Активна' : 'Неактивна'}</span></td>
+                        <td class="actions">
+                            <button class="btn-icon" onclick="editService(${s.id})" title="Редагувати">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                </svg>
+                            </button>
+                            <button class="btn-icon" onclick="deleteService(${s.id})" title="Видалити">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"/>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+                document.getElementById('services-table').innerHTML = html || '<tr><td colspan="5" style="text-align:center;color:var(--text-muted)">Немає послуг</td></tr>';
+            } catch (e) {
+                console.error('Failed to load services:', e);
+            }
+        }
+
+        function openServiceModal(service = null) {
+            document.getElementById('service-modal-title').textContent = service ? 'Редагувати послугу' : 'Додати послугу';
+            document.getElementById('service-id').value = service?.id || '';
+            document.getElementById('service-title').value = service?.title || '';
+            document.getElementById('service-description').value = service?.description || '';
+            document.getElementById('service-image').value = service?.imagePath || '';
+            document.getElementById('service-modal').classList.add('active');
+        }
+
+        async function editService(id) {
+            const service = await authFetch(`${API_URL}/admin/services/${id}`).then(r => r.json());
+            openServiceModal(service);
+        }
+
+        async function saveService() {
+            const id = document.getElementById('service-id').value;
+            const data = {
+                title: document.getElementById('service-title').value,
+                description: document.getElementById('service-description').value,
+                imagePath: document.getElementById('service-image').value,
+                active: true
+            };
+
+            try {
+                const url = id ? `${API_URL}/admin/services/${id}` : `${API_URL}/admin/services`;
+                const method = id ? 'PUT' : 'POST';
+                const response = await authFetch(url, {
+                    method,
+                    body: data
+                });
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.message || 'Server error');
+                }
+                closeModal('service-modal');
+                loadServices();
+                showToast('Збережено');
+            } catch (e) {
+                console.error('Save service error:', e);
+                showToast('Помилка: ' + e.message, true);
+            }
+        }
+
+        async function deleteService(id) {
+            if (!confirm('Видалити цю послугу?')) return;
+            try {
+                await authFetch(`${API_URL}/admin/services/${id}`, { method: 'DELETE' });
+                loadServices();
+                showToast('Видалено');
+            } catch (e) {
+                showToast('Помилка', true);
+            }
+        }
+
+        // Utils
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('uk-UA', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show' + (isError ? ' error' : '');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Init
+        loadDashboard();
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+/* Nova Architecture - Animations */
+
+/* ===== KEYFRAMES ===== */
+
+/* Text Reveal */
+@keyframes revealText {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade In Left */
+@keyframes fadeInLeft {
+    from {
+        transform: translateX(-40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade In Right */
+@keyframes fadeInRight {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Draw Line */
+@keyframes drawLine {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+/* Pulse */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Shake */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Bounce */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Rotate */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Counter Animation */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== SCROLL ANIMATION CLASSES ===== */
+
+/* Base animation class */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade In */
+.animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.animate-fade-in.is-visible {
+    opacity: 1;
+}
+
+/* Fade In Up */
+.animate-fade-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade In Down */
+.animate-fade-down {
+    opacity: 0;
+    transform: translateY(-60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-down.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade In Left */
+.animate-fade-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fade In Right */
+.animate-fade-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-fade-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale In */
+.animate-scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-scale-in.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== STAGGER DELAYS ===== */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+.stagger-7 { transition-delay: 0.7s; }
+.stagger-8 { transition-delay: 0.8s; }
+
+/* ===== LINE DRAW ANIMATION ===== */
+.line-draw {
+    position: relative;
+    overflow: hidden;
+}
+
+.line-draw::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-gold);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.line-draw.is-visible::after,
+.line-draw:hover::after {
+    width: 100%;
+}
+
+/* ===== TEXT SPLIT ANIMATION ===== */
+.split-text {
+    overflow: hidden;
+}
+
+.split-text .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-text.is-visible .char {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Generate stagger delays for characters */
+.split-text .char:nth-child(1) { transition-delay: 0.02s; }
+.split-text .char:nth-child(2) { transition-delay: 0.04s; }
+.split-text .char:nth-child(3) { transition-delay: 0.06s; }
+.split-text .char:nth-child(4) { transition-delay: 0.08s; }
+.split-text .char:nth-child(5) { transition-delay: 0.10s; }
+.split-text .char:nth-child(6) { transition-delay: 0.12s; }
+.split-text .char:nth-child(7) { transition-delay: 0.14s; }
+.split-text .char:nth-child(8) { transition-delay: 0.16s; }
+.split-text .char:nth-child(9) { transition-delay: 0.18s; }
+.split-text .char:nth-child(10) { transition-delay: 0.20s; }
+
+/* ===== PARALLAX ===== */
+.parallax {
+    will-change: transform;
+}
+
+.parallax-slow {
+    --parallax-speed: 0.2;
+}
+
+.parallax-medium {
+    --parallax-speed: 0.4;
+}
+
+.parallax-fast {
+    --parallax-speed: 0.6;
+}
+
+/* ===== HOVER EFFECTS ===== */
+
+/* Image Zoom */
+.hover-zoom {
+    overflow: hidden;
+}
+
+.hover-zoom img {
+    transition: transform var(--transition-slow);
+}
+
+.hover-zoom:hover img {
+    transform: scale(1.1);
+}
+
+/* Image Grayscale */
+.hover-grayscale img {
+    filter: grayscale(100%);
+    transition: filter var(--transition-medium);
+}
+
+.hover-grayscale:hover img {
+    filter: grayscale(0%);
+}
+
+/* Lift Effect */
+.hover-lift {
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Border Reveal */
+.hover-border {
+    position: relative;
+}
+
+.hover-border::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--color-gold);
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity var(--transition-medium), transform var(--transition-medium);
+    pointer-events: none;
+}
+
+.hover-border:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== PAGE TRANSITIONS ===== */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-transition-exit {
+    opacity: 1;
+}
+
+.page-transition-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* ===== LOADING STATES ===== */
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--color-graphite) 25%,
+        rgba(138, 138, 122, 0.3) 50%,
+        var(--color-graphite) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== IMAGE REVEAL ===== */
+.image-reveal {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-reveal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-dark);
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.image-reveal.is-visible::before {
+    transform: scaleX(0);
+}
+
+.image-reveal img {
+    transform: scale(1.3);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-reveal.is-visible img {
+    transform: scale(1);
+}
+
+/* ===== MARQUEE ===== */
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee__content {
+    display: inline-flex;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee__content span {
+    padding: 0 2rem;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover */
+.marquee:hover .marquee__content {
+    animation-play-state: paused;
+}
+
+/* ===== COUNTER ANIMATION ===== */
+.counter {
+    display: inline-block;
+}
+
+.counter.is-counting {
+    animation: countUp 0.5s ease forwards;
+}
+
+/* ===== BUTTON RIPPLE ===== */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .animate-on-scroll,
+    .animate-fade-in,
+    .animate-fade-up,
+    .animate-fade-down,
+    .animate-fade-left,
+    .animate-fade-right,
+    .animate-scale-in {
+        opacity: 1;
+        transform: none;
+    }
+
+    .parallax {
+        transform: none !important;
+    }
+}
