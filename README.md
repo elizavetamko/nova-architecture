@@ -760,4 +760,4 @@ java -jar nova-architecture-backend-1.0.0.jar
 
 ## Ліцензія
 
-(c) 2024 Nova Architecture. Усі права захищені.
+(c) 2025 Nova Architecture. Усі права захищені.
