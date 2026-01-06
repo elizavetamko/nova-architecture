@@ -779,123 +779,123 @@ java -jar nova-architecture-backend-1.0.0.jar
 ---
 
 ## Скріншоти
-<img width="1063" height="508" alt="image" src="https://github.com/user-attachments/assets/1c3de865-11df-47f7-8a3a-425bede89f78" />
+<img width="1788" height="922" alt="image" src="https://github.com/user-attachments/assets/2b02d2dd-e34e-4557-8a51-e1f39f4fd17d" />
 
 Рисунок 1 – Головний екран. Банер
 
-<img width="698" height="282" alt="image" src="https://github.com/user-attachments/assets/ddcb1a17-6e4f-4aa8-8cf3-567502c1d8b7" />
+<img width="717" height="322" alt="image" src="https://github.com/user-attachments/assets/22710815-3ba3-4f3c-a426-993db9d1c222" />
 
 Рисунок 2 – Головний екран. Блок "Архітектура, що визначає майбутне"
 
-<img width="523" height="287" alt="image" src="https://github.com/user-attachments/assets/d2c8195b-3404-42dc-85e0-f229918bd6c8" />
+<img width="758" height="432" alt="image" src="https://github.com/user-attachments/assets/60b45c9e-2402-42bf-9eb4-a300d79634c6" />
 
 Рисунок 3 – Головний екран. Блок "Вибрані проєкти"
 
-<img width="645" height="278" alt="image" src="https://github.com/user-attachments/assets/15023eb0-5a38-4501-b32f-9a42a76907ac" />
+<img width="782" height="349" alt="image" src="https://github.com/user-attachments/assets/fd30a937-1cb2-4f92-93d7-47909e98ffc4" />
 
 Рисунок 4 – Головний екран. Блок "Наші послуги"
 
-<img width="506" height="178" alt="image" src="https://github.com/user-attachments/assets/9ae42745-5933-4559-90a8-093584d81189" />
+<img width="656" height="222" alt="image" src="https://github.com/user-attachments/assets/5a71cfaf-a7dd-40ea-891d-d2b88e88a2d2" />
 
 Рисунок 5 – Головний екран. Блок "Готові втілити вашу ідею?"
 
-<img width="847" height="293" alt="image" src="https://github.com/user-attachments/assets/013cb967-2307-4a58-905d-4f3d8bc511cc" />
+<img width="1059" height="583" alt="image" src="https://github.com/user-attachments/assets/51ab1c84-c845-4961-b5f9-0899805e2c97" />
 
 Рисунок 6 – Сторінка "Про нас". Банер "Ми створюємо архітектуру, що змінює простір"
 
-<img width="675" height="389" alt="image" src="https://github.com/user-attachments/assets/8a907b01-4ad4-494e-8163-d6ee6ddcf6ff" />
+<img width="875" height="498" alt="image" src="https://github.com/user-attachments/assets/b1c2ffb6-8f8f-4714-a749-5e07fcd7e153" />
 
 Рисунок 7 – Сторінка "Про нас". Блок "Витончений бруталізм, як мистецтво"
 
-<img width="716" height="305" alt="image" src="https://github.com/user-attachments/assets/857f573f-5c72-4342-94d8-ae9779e792e1" />
+<img width="759" height="335" alt="image" src="https://github.com/user-attachments/assets/4aebb240-509c-455e-bd82-ea6f0f3c6e2b" />
 
 Рисунок 8 – Сторінка "Про нас". Блок "Принципи, якими ми керуємось"
 
-<img width="432" height="507" alt="image" src="https://github.com/user-attachments/assets/9ab484f6-686e-4054-b6c8-4d86890f9fbb" />
+<img width="674" height="654" alt="image" src="https://github.com/user-attachments/assets/1b00e68d-ecde-4807-8776-823645efa8ce" />
 
 Рисунок 9 – Сторінка "Про нас". Блок "Шлях розвитку"
 
-<img width="494" height="492" alt="image" src="https://github.com/user-attachments/assets/4ae81736-d8c4-4d93-b050-aae400063979" />
+<img width="733" height="790" alt="image" src="https://github.com/user-attachments/assets/2bf23151-d494-46e5-8977-c0c2385e626b" />
 
 Рисунок 10 – Сторінка "Про нас". Блок "Люди, які створюють Nova"
 
-<img width="647" height="222" alt="image" src="https://github.com/user-attachments/assets/763d3f01-4779-49ad-94b3-a12540347267" />
+<img width="689" height="235" alt="image" src="https://github.com/user-attachments/assets/1fcaa9bd-9611-49c7-9c52-51e4231c6b29" />
 
 Рисунок 11 – Сторінка "Про нас". Блок "Приєднуйся до нашої історії"
 
-<img width="526" height="461" alt="image" src="https://github.com/user-attachments/assets/f939d4ed-67ce-4047-b7a2-7fd0149ed926" />
+<img width="717" height="650" alt="image" src="https://github.com/user-attachments/assets/c68a2a7e-e617-4c17-a057-e86a70ce551a" />
 
 Рисунок 12 – Сторінка "Портфоліо реалізованих проєктів". Блок з картками проєктів
 
-<img width="839" height="345" alt="image" src="https://github.com/user-attachments/assets/4e8b8b56-b39e-4e3d-8842-31a22baea17a" />
+<img width="748" height="318" alt="image" src="https://github.com/user-attachments/assets/03b587be-5121-4d4a-8147-131a3392bb7a" />
 
 Рисунок 13 – Сторінка "Портфоліо реалізованих проєктів". Нижній блок 
 
-<img width="670" height="501" alt="image" src="https://github.com/user-attachments/assets/7ac36461-5685-4aa2-9671-fb5b03482437" />
+<img width="727" height="650" alt="image" src="https://github.com/user-attachments/assets/9a3e0f29-0590-4f0d-a64a-a05edbfae6d6" />
 
 Рисунок 14 – Сторінка "Послуги". Блок "Архітектурне проєктування"
 
-<img width="554" height="205" alt="image" src="https://github.com/user-attachments/assets/dd02d178-776a-49cf-afa3-90729f6e7a15" />
+<img width="745" height="426" alt="image" src="https://github.com/user-attachments/assets/f9a1291d-e74a-4c78-b272-79597eff3de7" />
 
 Рисунок 15 – Сторінка "Послуги". Блок "Дизайн інтер'єрів"
 
-<img width="523" height="221" alt="image" src="https://github.com/user-attachments/assets/3ad5bf9a-71bb-4ffa-854b-8bb4239f60cf" />
+<img width="765" height="445" alt="image" src="https://github.com/user-attachments/assets/bf005f5d-b1ee-45d8-becf-3ac94be8d6c3" />
 
 Рисунок 16 – Сторінка "Послуги". Блок "3D візуалізація"
 
-<img width="886" height="305" alt="image" src="https://github.com/user-attachments/assets/ffc2ac24-48c1-4621-8173-5d7bdfadab7c" />
+<img width="746" height="248" alt="image" src="https://github.com/user-attachments/assets/08f4be79-78c8-43fd-bf0b-42b7bd381785" />
 
 Рисунок 17 – Сторінка "Послуги". Блок "Етапи співпраці"
 
-<img width="842" height="430" alt="image" src="https://github.com/user-attachments/assets/0fb17de9-e706-4240-b23c-59ce4841140e" />
+<img width="802" height="419" alt="image" src="https://github.com/user-attachments/assets/94888a59-c519-420a-baac-e43cfc84b9db" />
 
 Рисунок 18 – Сторінка "Послуги". Блок "Обговоримо ваш проєкт"
 
-<img width="723" height="285" alt="image" src="https://github.com/user-attachments/assets/4dee5300-c0b0-4a3a-9884-5fe148f25d13" />
+<img width="789" height="502" alt="image" src="https://github.com/user-attachments/assets/6893b49e-233f-46d7-9221-53020d961eb3" />
 
 Рисунок 19 – Сторінка "Контакти" 
 
-<img width="852" height="145" alt="image" src="https://github.com/user-attachments/assets/6ef795eb-6651-420d-84ea-15e3495c4386" />
+<img width="1894" height="294" alt="image" src="https://github.com/user-attachments/assets/69cb09f9-f48f-4751-8833-22c2abc5dccc" />
 
 Рисунок 20 – Адмінпанель. Дашборд
 
-<img width="867" height="165" alt="image" src="https://github.com/user-attachments/assets/1d515370-d352-40cc-a6ab-3a86112c9ae2" />
+<img width="1899" height="373" alt="image" src="https://github.com/user-attachments/assets/6c9d3083-7ec9-43c7-b9de-69d3ea91a541" />
 
 Рисунок 21 – Адмінпанель. Проєкти
 
-<img width="176" height="231" alt="image" src="https://github.com/user-attachments/assets/9a729000-5c88-478f-a63a-6a4f97b33fad" />
+<img width="306" height="408" alt="image" src="https://github.com/user-attachments/assets/ab699384-3cfb-4b8b-8b10-395e06c9ed30" />
 
 Рисунок 22 – Форма додавання проєкту
 
-<img width="907" height="141" alt="image" src="https://github.com/user-attachments/assets/4edaf179-2491-4597-9c9a-a801097ed9dd" />
+<img width="1899" height="286" alt="image" src="https://github.com/user-attachments/assets/092d277e-5186-48dc-9f82-2d0df924fa41" />
 
 Рисунок 23 – Адмінпанель. Повідомлення
 
-<img width="286" height="256" alt="image" src="https://github.com/user-attachments/assets/908607bf-fb32-47ea-954a-b6c7d6f20f5a" />
+<img width="312" height="279" alt="image" src="https://github.com/user-attachments/assets/40ea15c2-2d91-41d5-bacc-42579ce866a3" />
 
 Рисунок 24 – Модальне вікно "Повідомлення"
 
-<img width="1066" height="172" alt="image" src="https://github.com/user-attachments/assets/a98b7c68-66f4-4348-9791-29ba51c123c3" />
+<img width="1898" height="333" alt="image" src="https://github.com/user-attachments/assets/344bca58-a90d-4163-99d8-f81ffeefd58e" />
 
 Рисунок 25 – Адмінпанель. Команда
 
-<img width="373" height="108" alt="image" src="https://github.com/user-attachments/assets/f06beb5f-d0b4-4504-8732-f90040ab94f0" />
+<img width="355" height="108" alt="image" src="https://github.com/user-attachments/assets/98f4408e-ade5-4c23-80ac-d72697a04cc0" />
 
 Рисунок 26 – Повідомлення з запитом на видалення члена команди
 
-<img width="230" height="283" alt="image" src="https://github.com/user-attachments/assets/b60017e2-925e-4e61-b397-259c6e655019" />
+<img width="308" height="374" alt="image" src="https://github.com/user-attachments/assets/021edc5a-f977-4e0d-972b-c6bb078020aa" />
 
 Рисунок 27 – Форма додавання члена команди
 
-<img width="969" height="152" alt="image" src="https://github.com/user-attachments/assets/16d3f49d-6caa-441b-a8b1-5eb00fc794d4" />
+<img width="1900" height="374" alt="image" src="https://github.com/user-attachments/assets/7840443a-6346-4693-968f-0b19dab90c98" />
 
 Рисунок 28 – Адмінпанель. Послуги
 
-<img width="216" height="195" alt="image" src="https://github.com/user-attachments/assets/0cbbbe31-a56a-4465-b432-bf97191ac396" />
+<img width="306" height="290" alt="image" src="https://github.com/user-attachments/assets/8182df58-b189-46b2-b0b2-33e6162e5120" />
 
 Рисунок 29 – Форма редагування послуги
 
-<img width="218" height="200" alt="image" src="https://github.com/user-attachments/assets/f8756e01-94cc-49fd-ab21-2c3c217a166a" />
+<img width="311" height="290" alt="image" src="https://github.com/user-attachments/assets/8f2fdabc-8528-4395-861a-b5d1b498abba" />
 
 Рисунок 30 – Форма додавання послуги
 
